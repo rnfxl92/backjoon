@@ -1,18 +1,13 @@
-import operator as op
-from functools import reduce
 
-def nCr(n, r):
-     r = min(r, n-r)
-     numerator = reduce(op.mul,range(n,n-r, -1))
-     denominator = reduce(op.mul, range(1, r+1))
-     result = numerator / denominator
-     return int(result)
+def div_num(n, k): #각 n!에 있는 k의 갯수를 구함
+    result = 0
+    while n>0:
+        n //= k
+        result += n
+    return result
 
 n, m = map(int, input().split())
-temp = nCr(n, m)
-count = 0
-while temp %10 == 0:
-    count +=1
-    temp //= 10
 
-print(count)
+count5 = div_num(n, 5) - div_num(m, 5) - div_num(n-m, 5)
+count2 = div_num(n, 2) - div_num(m, 2) - div_num(n-m, 2)
+print(min(count2, count5))
